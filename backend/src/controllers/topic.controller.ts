@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Post } from "@nestjs/common";
-import { Topic } from "src/entities/user.entity";
+import { Topic } from "src/entities/topic.entity";
 import { TopicService } from "src/services/topic.service";
 
 @Controller('topics')

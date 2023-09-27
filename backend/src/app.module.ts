@@ -6,9 +6,10 @@ import { ProfileService } from './services/profile.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserController } from './controllers/user.controller';
 import { UserService } from './services/user.service';
-import { Topic, User } from './entities/user.entity';
+import { User } from './entities/user.entity';
 import { TopicService } from './services/topic.service';
 import { TopicController } from './controllers/topic.controller';
+import { Topic } from './entities/topic.entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -18,6 +19,7 @@ import { TopicController } from './controllers/topic.controller';
     username: 'root',
     password: '',
     database: 'prm_2023',
+    synchronize: true,
     entities: [User, Topic]
   }),
   TypeOrmModule.forFeature([User, Topic])
