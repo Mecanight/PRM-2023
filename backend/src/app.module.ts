@@ -12,9 +12,16 @@ import { TopicController } from './controllers/topic.controller';
 import { Topic } from './entities/topic.entity';
 import { AuthService } from './services/auth.service';
 import { AuthController } from './controllers/auth.controller';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
+  imports: [
+    JwtModule.register({
+      global: true,
+      secret: 'materdei',
+      signOptions: {expiresIn: '24h'}
+    }),
+    TypeOrmModule.forRoot({
     type: 'mysql',
     host: '127.0.0.1',
     port: 3306,
