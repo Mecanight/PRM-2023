@@ -26,7 +26,7 @@ import { JwtModule } from '@nestjs/jwt';
     host: '127.0.0.1',
     port: 3306,
     username: 'root',
-    password: '',
+    password: 'newpass',
     database: 'prm_2023',
     synchronize: true,
     entities: [User, Topic]

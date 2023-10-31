@@ -21,7 +21,7 @@ export class AuthController{
             throw new UnauthorizedException();
         }
 
-        const payload = {userId: found.id, username: found.username}
+        const payload = {userId: found.id, username: found.username, fullName: found.fullname}
         const token = await this.jwtService.signAsync(payload);
 
         return {
