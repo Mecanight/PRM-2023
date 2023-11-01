@@ -1,27 +1,30 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, UnauthorizedException } from "@nestjs/common";
+import { Body, ClassSerializerInterceptor, Controller, HttpCode, HttpException, HttpStatus, Post, UnauthorizedException, UseInterceptors } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
+import { User } from "src/entities/user.entity";
 import { AuthService } from "src/services/auth.service";
+import { UserService } from "src/services/user.service";
 
-
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller('auth')
-export class AuthController{
+export class AuthController {
 
     constructor(
         private readonly service: AuthService,
-        private readonly jwtService: JwtService
-    ){}
+        private readonly jwtService: JwtService,
+        private readonly userService: UserService
+    ) { }
 
-    @Post()
+    @Post('signin')
     @HttpCode(HttpStatus.OK)
-    async signIn(@Body() credential:Record<string, string>){
+    async signIn(@Body() credential: Record<string, string>) {
 
         const found = await this.service.validateCredential(credential.username, credential.password)
 
-        if(!found){
+        if (!found) {
             throw new UnauthorizedException();
         }
 
-        const payload = {userId: found.id, username: found.username, fullName: found.fullname}
+        const payload = { userId: found.id, username: found.username, fullName: found.fullname }
         const token = await this.jwtService.signAsync(payload);
 
         return {
@@ -29,4 +32,14 @@ export class AuthController{
         }
     }
 
+    @Post('signup')
+    async signUp(@Body() user: User): Promise<User> {
+
+        const found = await this.userService.findByUsername(user.username)
+
+        if (found) {
+            throw new HttpException('Este nome de usuário já esta em uso', HttpStatus.CONFLICT)
+        }
+        return this.userService.create(user)
+    }
 }

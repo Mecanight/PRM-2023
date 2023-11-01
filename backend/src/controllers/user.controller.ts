@@ -25,8 +25,7 @@ export class UserController {
 
     @Get(':username')
     async findByUsername(@Param('username') username: string): Promise<User> {
-        const found = await this.service.findByUsername(username)
-
+        const found = await this.service.findByUsername(username);
         if (!found) {
             throw new HttpException('User not found', HttpStatus.NOT_FOUND)
         }
@@ -35,8 +34,9 @@ export class UserController {
     }
 
     @Post()
-    create(@Body() user: User): Promise<User> {
+    async create(@Body() user: User): Promise<User> {
         return this.service.create(user)
+
     }
 
     @Delete(':id')
