@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Topic } from "src/entities/topic.entity";
+import { User } from "src/entities/user.entity";
 import { ApplicationEsception } from "src/exceptions";
 import { Repository } from "typeorm";
 
@@ -12,11 +13,31 @@ export class TopicService {
         private readonly repository: Repository<Topic>
     ) { }
     findAll(): Promise<Topic[]> {
-        return this.repository.find();
+
+        return this.repository.find({
+
+            order: {
+                id: 'DESC'
+            }
+
+        });
     }
 
     findById(id: number): Promise<Topic> {
         return this.repository.findOneBy({ id: id })
+    }
+
+    findByUser(user: User): Promise<Topic[]> {
+        return this.repository.find({
+            where: {
+                owner: {
+                    id: user.id
+                }
+            },
+            order: {
+                id: 'DESC'
+            }
+        });
     }
 
     create(user: Topic): Promise<Topic> {

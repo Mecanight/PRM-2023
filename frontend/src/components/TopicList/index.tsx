@@ -5,9 +5,17 @@ type TopicListProps = {
     items: any
 }
 
-function TopicList({ items }: TopicListProps) {
+function TopicList({
+    items
+}: TopicListProps) {
     return (
-        <Box id="topics-list" display="flex" flexDirection="column" gap={3} style={{ maxWidth: "64rem" }} border="3px solid red">
+        <Box id="topics-list" display="flex" flexDirection="column"
+
+            gap={3} style={{ marginTop: '2rem', maxWidth: "64rem" }}
+
+            //este item é para verificar conteudo descentralizado
+            border="3px solid red">
+
             {items.map((item: any, index: number) => (
                 <Box display="flex" flexDirection="column" gap={3} key={index}>
                     <TopicCard topic={item} />
