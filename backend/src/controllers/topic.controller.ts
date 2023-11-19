@@ -14,7 +14,7 @@ export class TopicController {
 
     @UseGuards(AuthGuard)
     @Get()
-    async findall(@Query() query): Promise<Topic[]> {
+    async findAll(@Query() query): Promise<Topic[]> {
 
         if (query?.username) {
 
@@ -37,7 +37,7 @@ export class TopicController {
 
     @Get(':id')
     async findById(@Param('id', ParseIntPipe) id: number): Promise<Topic> {
-        const found = await this.service.findById(id)
+        const found = await this.service.findById(id);
 
         if (!found) {
             throw new HttpException('Topic not found', HttpStatus.NOT_FOUND)
@@ -48,7 +48,7 @@ export class TopicController {
 
     @Post()
     create(@Body() topic: Topic): Promise<Topic> {
-        return this.service.create(topic)
+        return this.service.create(topic);
     }
 
     @Delete(':id')
@@ -60,17 +60,17 @@ export class TopicController {
             throw new HttpException('Topic not found', HttpStatus.NOT_FOUND)
         }
 
-        return this.service.delete(id);
+        return this.service.delete(found.id);
     }
 
     @Put(':id')
     async update(@Param('id', ParseIntPipe) id: number, @Body() topic: Topic): Promise<Topic> {
-        const found = await this.service.findById(id)
+        const found = await this.service.findById(id);
 
         if (!found) {
             throw new HttpException('Topic not found', HttpStatus.NOT_FOUND)
         }
 
-        return this.service.update(id, topic);
+        return this.service.update(found.id, topic);
     }
 }

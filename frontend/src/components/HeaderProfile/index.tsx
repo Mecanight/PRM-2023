@@ -1,19 +1,23 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import { CalendarMonthOutlined } from "@mui/icons-material";
 
-//import de imagens
+import { FormattedDate, IntlProvider } from "react-intl";
+
+//Import de imagens
 import banner from '../../assets/img/profile_banner.png';
 import avatar from '../../assets/img/profile_avatar.jpg';
 
-//import do estilo
+//Import do estilo
 import './style.css'
-import { FormattedDate, IntlProvider } from "react-intl";
+
 
 type HeaderProfileProps = {
     user: any
 }
 
-function HeaderProfile({ user }: HeaderProfileProps) {
+function HeaderProfile({
+    user
+}: HeaderProfileProps) {
     return (
         <Box id="header-profile">
 
@@ -22,8 +26,8 @@ function HeaderProfile({ user }: HeaderProfileProps) {
             </Box>
 
             <Box className="header-profile-detail">
-                <Avatar alt={user.fullname} style={{ width: 128, height: 128 }} src={avatar}
-                    className="header-profile-detail-avatar" />
+                <Avatar alt={user.fullname} style={{ width: 128, height: 128 }}
+                    src={avatar} className="header-profile-detail-avatar" />
                 <Box className="header-profile-detail-text">
                     <Typography variant="h5">
                         {user.fullname}

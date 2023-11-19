@@ -1,5 +1,5 @@
 
-import { Alert, Box, Button, Card, CardContent, Snackbar, TextField, Typography } from "@mui/material"
+import { Alert, Box, Button, Card, CardContent, Snackbar, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hook/useAuth";
 import { IUser } from "../../@types";
@@ -37,7 +37,7 @@ function SignUpPage() {
 
         setLoading(true);
         setMessageError('');
-        setMessageSuccess('')
+        setMessageSuccess('');
 
         try {
 
@@ -52,7 +52,7 @@ function SignUpPage() {
                 }
             )
 
-            setMessageSuccess('Usuário criado com sucesso')
+            setMessageSuccess('Usuário criado com sucesso');
 
         } catch (e) {
             const error = e as Error;

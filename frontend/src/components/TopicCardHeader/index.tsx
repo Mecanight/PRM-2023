@@ -31,4 +31,4 @@ function TopicCardHeader({
     )
 }
 
-export default TopicCardHeader
+export default TopicCardHeader;

@@ -1,7 +1,7 @@
-import { ITopic } from "../../@types"
-import TopicCardActions from "../TopicCardActions"
-import TopicCardBody from "../TopicCardBody"
-import TopicCardHeader from "../TopicCardHeader"
+import { ITopic } from "../../@types";
+import TopicCardActions from "../TopicCardActions";
+import TopicCardBody from "../TopicCardBody";
+import TopicCardHeader from "../TopicCardHeader";
 
 type TopicCardProps = {
     topic: ITopic
@@ -22,4 +22,4 @@ function TopicCard({
     )
 }
 
-export default TopicCard
+export default TopicCard;

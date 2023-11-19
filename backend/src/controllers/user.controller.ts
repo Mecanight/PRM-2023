@@ -8,13 +8,13 @@ export class UserController {
     constructor(private readonly service: UserService) { }
 
     @Get()
-    findall(): Promise<User[]> {
+    findAll(): Promise<User[]> {
         return this.service.findAll();
     }
 
     @Get(':id')
     async findById(@Param('id', ParseIntPipe) id: number): Promise<User> {
-        const found = await this.service.findById(id)
+        const found = await this.service.findById(id);
 
         if (!found) {
             throw new HttpException('User not found', HttpStatus.NOT_FOUND)
@@ -34,31 +34,31 @@ export class UserController {
     }
 
     @Post()
-    async create(@Body() user: User): Promise<User> {
-        return this.service.create(user)
+    create(@Body() user: User): Promise<User> {
+        return this.service.create(user);
 
     }
 
     @Delete(':id')
     @HttpCode(204)
     async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
-        const found = await this.service.findById(id)
+        const found = await this.service.findById(id);
 
         if (!found) {
             throw new HttpException('User not found', HttpStatus.NOT_FOUND)
         }
 
-        return this.service.delete(id);
+        return this.service.delete(found.id);
     }
 
     @Put(':id')
     async update(@Param('id', ParseIntPipe) id: number, @Body() user: User): Promise<User> {
-        const found = await this.service.findById(id)
+        const found = await this.service.findById(id);
 
         if (!found) {
             throw new HttpException('User not found', HttpStatus.NOT_FOUND)
         }
 
-        return this.service.update(id, user);
+        return this.service.update(found.id, user);
     }
 }

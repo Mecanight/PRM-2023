@@ -18,28 +18,28 @@ export class AuthController {
     @HttpCode(HttpStatus.OK)
     async signIn(@Body() credential: Record<string, string>) {
 
-        const found = await this.service.validateCredential(credential.username, credential.password)
+        const found = await this.service.validateCredential(credential.username, credential.password);
 
         if (!found) {
             throw new UnauthorizedException();
         }
 
-        const payload = { userId: found.id, username: found.username, fullName: found.fullname }
+        const payload = { userId: found.id, userName: found.username, fullName: found.fullname }
         const token = await this.jwtService.signAsync(payload);
 
         return {
             accessToken: token
-        }
+        };
     }
 
     @Post('signup')
     async signUp(@Body() user: User): Promise<User> {
 
-        const found = await this.userService.findByUsername(user.username)
+        const found = await this.userService.findByUsername(user.username);
 
         if (found) {
-            throw new HttpException('Este nome de usuário já esta em uso', HttpStatus.CONFLICT)
+            throw new HttpException('Este nome de usuário já está em uso', HttpStatus.CONFLICT)
         }
-        return this.userService.create(user)
+        return this.userService.create(user);
     }
 }

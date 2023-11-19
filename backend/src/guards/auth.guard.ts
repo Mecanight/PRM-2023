@@ -9,40 +9,40 @@ export class AuthGuard implements CanActivate {
     constructor(
         private readonly jwtService: JwtService,
         private readonly userService: UserService
-    ){}
+    ) { }
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const request = context.switchToHttp().getRequest();
-        const token = this.extractTokenFromHeader(request)
+        const token = this.extractTokenFromHeader(request);
 
         //verifico se o token existe
-
-        if(!token){
+        if (!token) {
             throw new UnauthorizedException('Token inexistente')
         }
 
-        //verifico se o token é válido
         let username = '';
-
+        //verifico se o token é válido
         try {
-            const payload = await this.jwtService.verifyAsync(token)
-            username = payload.username;
+            const payload = await this.jwtService.verifyAsync(token);
+            username = payload.userName;
         } catch {
-            throw new UnauthorizedException('Token Inválido')
+            throw new UnauthorizedException('Token inválido')
         }
 
-        const found = await this.userService.findByUsername(username)
+        //To-do: Verificar se o usuário do payload está cadastrado
+        const found = await this.userService.findByUsername(username);
 
-        if (!found){
+        if (!found) {
             throw new UnauthorizedException('Usuário não cadastrado')
         }
 
         return true;
     }
 
-    extractTokenFromHeader(request: Request): string | undefined{
-        const [type, token] = request.headers.authorization?.split(' ') ?? [];
-        return type === 'Bearer' ? token: undefined;
+    extractTokenFromHeader(request: Request): string | undefined {
+        const [type, token] = request.headers.authorization?.split(' ')  ?? [];
+
+        return type === 'Bearer' ? token : undefined;
     }
 
 }

@@ -18,30 +18,33 @@ import { JwtModule } from '@nestjs/jwt';
     JwtModule.register({
       global: true,
       secret: 'materdei',
-      signOptions: {expiresIn: '24h'}
+      signOptions: { expiresIn: '24h' }
     }),
     TypeOrmModule.forRoot({
-    type: 'mysql',
-    host: '127.0.0.1',
-    port: 3306,
-    username: 'root',
-    password: 'newpass',
-    database: 'prm_2023',
-    synchronize: true,
-    entities: [User, Topic]
-  }),
-  TypeOrmModule.forFeature([User, Topic])
-],
+      type: 'mysql',
+      host: '127.0.0.1',
+      port: 3306,
+      username: 'root',
+      password: 'newpass',
+      database: 'prm_2023',
+      synchronize: true,
+      entities: [User, Topic]
+    }),
+    TypeOrmModule.forFeature([User, Topic])
+  ],
   controllers: [
-    AppController, 
-    ProfileController, 
+    AppController,
+    ProfileController,
     UserController,
     TopicController,
-    AuthController],
+    AuthController
+  ],
 
-  providers: [AppService,
+  providers: [
+    AppService,
     UserService,
     TopicService,
-    AuthService],
+    AuthService
+  ],
 })
-export class AppModule {}
+export class AppModule { }

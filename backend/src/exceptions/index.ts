@@ -1,4 +1,4 @@
-export class ApplicationEsception extends Error {
+export class ApplicationException extends Error {
     statusCode: number;
     message: string;
 
@@ -6,6 +6,6 @@ export class ApplicationEsception extends Error {
         super(message);
         this.statusCode = statusCode;
         this.message = message;
-        Object.setPrototypeOf(this, ApplicationEsception.prototype)
+        Object.setPrototypeOf(this, ApplicationException.prototype)
     }
 }

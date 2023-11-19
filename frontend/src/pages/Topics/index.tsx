@@ -83,7 +83,8 @@ function TopicPage() {
     }, [tab])
 
     return (
-        <Box id="topic-page" display="flax" flexDirection="column" alignItems="center" gap={3}>
+        <Box id="topic-page" display="flex" flexDirection="column"
+            alignItems="center" gap={3}>
             <HeaderProfile user={profile} />
 
             <Box className="topic-page-content" style={{ width: '64rem' }}>

@@ -6,7 +6,9 @@ import { UserService } from "src/services/user.service";
 @Controller('profile')
 export class ProfileController {
 
-    constructor(private userService: UserService) { }
+    constructor(
+        private userService: UserService
+    ) { }
 
     @Get(':username')
     getProfile(@Param('username') username: string): Promise<User> {
@@ -19,6 +21,4 @@ export class ProfileController {
         return found;
 
     }
-
 }
-
