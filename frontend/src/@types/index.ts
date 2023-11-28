@@ -17,6 +17,8 @@ export interface ITopic {
     content: string;
     owner?: IUser;
     createdAt?: Date;
+    repost?: ITopic;
+    topic_id?: number;
 }
 
 export interface IComment {
