@@ -15,6 +15,7 @@ const _PROFILE = '/profile';
 const _TOPICS = '/topics';
 const _COMMENTS = '/comments';
 const _REPOSTS = '/reposts';
+const _LIKES = '/likes';
 
 //AUTH
 const signIn = (credential: ICredential) => api.post(`${_AUTH}/signin`, credential);
@@ -41,6 +42,9 @@ const removeComment = (comment: IComment) => (api.delete(`${_COMMENTS}/${comment
 const getRepostsByTopic = (topic: ITopic) => (api.get(`${_REPOSTS}?topic=${topic.id}`));
 
 //LIKES
+const getLikesByTopic = (topic: ITopic) => (api.get(`${_LIKES}?topic=${topic.id}`));
+const createLike = (comment: IComment) => (api.post(_LIKES, comment));
+const removeLike = (comment: IComment) => (api.delete(`${_LIKES}/${comment.id}`));
 
 export {
     signIn,
@@ -52,5 +56,8 @@ export {
     getCommentsByTopic,
     createComment,
     removeComment,
-    getRepostsByTopic
+    getRepostsByTopic,
+    getLikesByTopic,
+    createLike,
+    removeLike,
 }

@@ -19,6 +19,7 @@ export interface ITopic {
     createdAt?: Date;
     repost?: ITopic;
     topic_id?: number;
+    like?: ITopic;
 }
 
 export interface IComment {
@@ -27,4 +28,10 @@ export interface IComment {
     user?: IUser;
     topic?: ITopic;
     createdAt?: Date;
+}
+
+export interface ILike {
+    id?: number;
+    user?: IUser;
+    topic?: ITopic;
 }
